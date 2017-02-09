@@ -45,7 +45,19 @@ fileref.close()
 ## HINT: Remember that you'll need to open the file you created in Part 1, read the contets into one big string, and make a BeautifulSoup object out of that string!
 ## NOTE that the provided link does not include saving the online data in a file as part of the process. But it still provides very useful hints/tricks about how to look for and identify the headlines on the NY Times page.
 
+fileref = open("nytimes_data.html", 'r', encoding = 'utf-8')
+fileref_string = fileref.read()
+soup = BeautifulSoup(fileref_string, "lxml")
+count = 0
+nytimes_headlines = []
 
+for story_heading in soup.find_all(class_="story-heading"): 
+    if story_heading.a:
+    	print(story_heading.a.text)
+    	nytimes_headlines.append(story_heading.a.text)
+    	count += 1
+    if count > 10:
+    	break
 
 
 #####################
