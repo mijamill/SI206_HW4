@@ -86,6 +86,17 @@ htmldoc = response.text
 soup = BeautifulSoup(htmldoc,"html.parser")
 people = soup.find_all("div",{"class":"views-row"})
 umsi_titles = {}
+names = []
+titles = []
+
+for name in soup.find_all(class_="field field-name-title field-type-ds field-label-hidden"):
+	names.append(name.text)
+for title in soup.find_all(class_="field field-name-field-person-titles field-type-text field-label-hidden"):
+	titles.append(title.text)
+
+umsi_titles = dict(zip(names, titles))
+
+
 
 ## It may be helpful to translate the following from English to code:
 
