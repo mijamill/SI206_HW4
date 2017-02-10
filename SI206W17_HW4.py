@@ -14,8 +14,10 @@ from bs4 import BeautifulSoup
 
 ## Write the Python code to do so here.
 
+html = requests.get("http://nytimes.com")
 
-html_text = requests.get("http://nytimes.com").text 
+
+html_text = requests.get("http://nytimes.com").text
 fileref = open("nytimes_data.html","w", encoding = 'utf-8') 
 fileref.write(html_text) 
 fileref.close()
@@ -53,11 +55,12 @@ nytimes_headlines = []
 
 for story_heading in soup.find_all(class_="story-heading"): 
     if story_heading.a:
-    	print(story_heading.a.text)
     	nytimes_headlines.append(story_heading.a.text)
     	count += 1
-    if count > 10:
+    if count > 9:
     	break
+
+
 
 
 #####################
@@ -107,7 +110,7 @@ class HW4_Part2(unittest.TestCase):
 	def test_first_last_elem(self):
 		self.assertEqual(type(nytimes_headlines[0]),type(""), "Testing that the first type in the nytimes_headlines list is a string")
 		self.assertEqual(type(nytimes_headlines[-1]),type(""), "Testing that the last type in the nytimes_headlines list is a string")
-	def length_of_ten(self):
+	def test_length_of_ten(self):
 		self.assertEqual(len(nytimes_headlines),10, "Testing that there are ten headlines in the list")
 
 class HW4_Part3(unittest.TestCase):
